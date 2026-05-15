@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twelve Stays — Au-dessus de la ville.</title>
+  <meta name="description" content="Twelve Stays. Une nouvelle façon de vivre, travailler et se retrouver. Douze studios premium, un rooftop d'exception, un écosystème pensé pour l'élégance. Dar Bouazza, Casablanca. Ouverture 2026.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Twelve Stays — Au-dessus de la ville.">
+  <meta property="og:description" content="Une nouvelle façon de vivre, travailler et se retrouver. Ouverture 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://twelvestays.ma">
+  <meta property="og:image" content="https://twelvestays.ma/facade.jpg">
+  <meta property="og:locale" content="fr_FR">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&family=Inter:wght@100;200;300;400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --nuit-profonde: #0D0A05;
+      --espresso: #1B1300;
+      --chataigne: #2A1C14;
+      --or-sable: #CBA97A;
+      --bone: #F2EDE4;
+      --bone-translucent: rgba(242, 237, 228, 0.08);
+      --or-translucent: rgba(203, 169, 122, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--espresso);
+      color: var(--bone);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-weight: 200;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image: url('facade.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: brightness(0.65) saturate(1.05);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: 
+        linear-gradient(180deg, 
+          rgba(13, 10, 5, 0.55) 0%, 
+          rgba(27, 19, 0, 0.35) 40%, 
+          rgba(27, 19, 0, 0.5) 70%,
+          rgba(13, 10, 5, 0.85) 100%
+        );
+    }
+
+    .hero-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .label-top {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--or-sable);
+      text-transform: uppercase;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 0.2s forwards;
+      position: relative;
+      padding: 0 2rem;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .label-top::before,
+    .label-top::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 30px;
+      height: 1px;
+      background: var(--or-sable);
+      opacity: 0.5;
+    }
+
+    .label-top::before { left: -20px; }
+    .label-top::after { right: -20px; }
+
+    .monogram {
+      width: 84px;
+      height: 84px;
+      border: 1.5px solid var(--or-sable);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 0.4s forwards;
+      background: rgba(13, 10, 5, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .monogram-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--or-sable);
+      letter-spacing: 0.05em;
+    }
+
+    .wordmark-image {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 0.7s forwards;
+      filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.5));
+    }
+
+    .slogan {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      letter-spacing: 0.45em;
+      color: var(--or-sable);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 0.85s forwards;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--bone);
+      line-height: 1.05;
+      margin: 1.5rem 0 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 1s forwards;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .tagline-accent {
+      color: var(--or-sable);
+      font-style: italic;
+    }
+
+    .hero-description {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: var(--bone);
+      max-width: 540px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeInDescription 1.2s ease-out 1.3s forwards;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes fadeInDescription {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 0.92; transform: translateY(0); }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 2s forwards, bounce 2s ease-in-out 3s infinite;
+      cursor: pointer;
+      z-index: 10;
+      text-decoration: none;
+    }
+
+    .scroll-text {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--bone);
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--or-sable), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== VIP SECTION ===== */
+    .vip-section {
+      background: var(--espresso);
+      padding: 8rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vip-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(ellipse at top, rgba(203, 169, 122, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, rgba(13, 10, 5, 0.6) 0%, transparent 70%);
+    }
+
+    .vip-content {
+      position: relative;
+      z-index: 10;
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .vip-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--or-sable);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .vip-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      color: var(--bone);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .vip-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 1rem;
+      color: var(--bone);
+      opacity: 0.75;
+      max-width: 440px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+
+    /* Form */
+    .ml-form-wrapper {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .form-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--or-translucent);
+      transition: border-color 0.4s ease;
+      margin-bottom: 1rem;
+    }
+
+    .form-field:focus-within {
+      border-bottom-color: var(--or-sable);
+    }
+
+    .form-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 1rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 1rem;
+      color: var(--bone);
+      letter-spacing: 0.02em;
+    }
+
+    .form-input::placeholder {
+      color: var(--bone);
+      opacity: 0.35;
+      font-weight: 200;
+    }
+
+    .form-input:-webkit-autofill,
+    .form-input:-webkit-autofill:hover,
+    .form-input:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--bone);
+      -webkit-box-shadow: 0 0 0px 1000px var(--espresso) inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .form-submit {
+      background: transparent;
+      border: none;
+      color: var(--or-sable);
+      cursor: pointer;
+      padding: 1rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .form-submit:hover {
+      opacity: 0.7;
+      transform: translateX(4px);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .form-helper {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.75rem;
+      color: var(--bone);
+      opacity: 0.5;
+      margin-top: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .form-success {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--or-sable);
+      padding: 2rem 0;
+      line-height: 1.4;
+    }
+
+    .form-success.visible {
+      display: block;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .form-error {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #d97757;
+      margin-top: 1rem;
+    }
+
+    .form-error.visible {
+      display: block;
+    }
+
+    /* Loading spinner */
+    .form-loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--or-translucent);
+      border-top-color: var(--or-sable);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Benefits list */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 5rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--bone-translucent);
+    }
+
+    .benefit {
+      text-align: center;
+    }
+
+    .benefit-icon {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 1rem;
+      stroke: var(--or-sable);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .benefit-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--or-sable);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .benefit-text {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.85rem;
+      color: var(--bone);
+      opacity: 0.7;
+      line-height: 1.6;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--nuit-profonde);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.5rem;
+      color: var(--or-sable);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-slogan {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--or-sable);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      opacity: 0.7;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--bone);
+      opacity: 0.65;
+      text-decoration: none;
+      transition: opacity 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      color: var(--or-sable);
+    }
+
+    .footer-separator {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--or-sable);
+      opacity: 0.4;
+    }
+
+    .footer-address {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--bone);
+      opacity: 0.4;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-credit {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--bone);
+      opacity: 0.3;
+      text-transform: uppercase;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 3rem 1.5rem;
+        min-height: 100vh;
+      }
+
+      .label-top {
+        font-size: 0.6rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .monogram {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 2rem;
+      }
+
+      .monogram-text {
+        font-size: 1.5rem;
+      }
+
+      .wordmark-image {
+        max-width: 280px;
+      }
+
+      .tagline {
+        margin: 1rem 0 2rem;
+      }
+
+      .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+
+      .scroll-indicator {
+        bottom: 1.5rem;
+      }
+
+      .vip-section {
+        padding: 5rem 1.5rem;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-top: 3.5rem;
+        padding-top: 3rem;
+      }
+
+      .footer {
+        padding: 3rem 1.5rem 2rem;
+      }
+
+      .footer-links {
+        gap: 1.25rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="Façade Twelve Stays — Entrée principale, Dar Bouazza, Casablanca"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      
+      <p class="label-top">Ouverture · 2026</p>
+
+      <div class="monogram" aria-hidden="true">
+        <span class="monogram-text">XII</span>
+      </div>
+
+      <img 
+        src="wordmark.png" 
+        alt="Twelve Stays" 
+        class="wordmark-image"
+      >
+
+      <p class="slogan">Work · Live · Above</p>
+
+      <h1 class="tagline">
+        Au-dessus<br>
+        <span class="tagline-accent">de la ville.</span>
+      </h1>
+
+      <p class="hero-description">
+        Douze studios premium. Un rooftop d'exception. Un écosystème pensé pour celles et ceux qui choisissent de vivre, travailler et se retrouver autrement.
+      </p>
+    </div>
+
+    <a href="#vip" class="scroll-indicator" aria-label="Découvrir">
+      <span class="scroll-text">Découvrir</span>
+      <span class="scroll-line"></span>
+    </a>
+  </section>
+
+  <!-- ===== VIP SIGNUP ===== -->
+  <section class="vip-section" id="vip">
+    <div class="vip-content">
+      
+      <p class="vip-label">Liste privée · Accès anticipé</p>
+      
+      <h2 class="vip-title">
+        Rejoignez la liste<br>
+        avant tout le monde.
+      </h2>
+
+      <p class="vip-subtitle">
+        Recevez en avant-première l'accès aux réservations, des tarifs privilégiés, et des invitations exclusives à l'ouverture.
+      </p>
+
+      <!-- Formulaire Mailerlite intégré -->
+      <div class="ml-form-wrapper">
+        <form 
+          id="signup-form"
+          class="ml-block-form form-field"
+          action="https://assets.mailerlite.com/jsonp/2350150/forms/187514603413964798/subscribe" 
+          method="post"
+          target="_blank"
+        >
+          <input 
+            type="email" 
+            name="fields[email]"
+            id="email"
+            class="form-input"
+            placeholder="votre@email.com" 
+            required
+            autocomplete="email"
+            aria-label="Email"
+          >
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+          
+          <button type="submit" class="form-submit" id="submit-btn">
+            Rejoindre →
+          </button>
+        </form>
+
+        <p class="form-helper" id="form-helper">
+          Inscription confidentielle · Désinscription à tout moment
+        </p>
+
+        <p id="success-message" class="form-success">
+          Bienvenue.<br>Vous serez parmi les premiers à découvrir Twelve Stays.
+        </p>
+      </div>
+
+      <!-- Benefits -->
+      <div class="benefits">
+        <div class="benefit">
+          <svg class="benefit-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <p class="benefit-title">Accès anticipé</p>
+          <p class="benefit-text">Réservez vos dates avant l'ouverture publique</p>
+        </div>
+
+        <div class="benefit">
+          <svg class="benefit-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L15 8.5L22 9.5L17 14.5L18 21.5L12 18L6 21.5L7 14.5L2 9.5L9 8.5Z"/>
+          </svg>
+          <p class="benefit-title">Tarifs privilégiés</p>
+          <p class="benefit-text">Une offre fondateurs réservée aux premiers inscrits</p>
+        </div>
+
+        <div class="benefit">
+          <svg class="benefit-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <p class="benefit-title">Soirée d'ouverture</p>
+          <p class="benefit-text">Invitation exclusive à l'inauguration privée</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-content">
+      
+      <p class="footer-monogram">XII</p>
+
+      <p class="footer-slogan">Work · Live · Above</p>
+
+      <div class="footer-links">
+        <a href="https://instagram.com/twelvestays" class="footer-link" target="_blank" rel="noopener">@twelvestays</a>
+        <span class="footer-separator" aria-hidden="true"></span>
+        <a href="mailto:contact@twelvestays.ma" class="footer-link">contact@twelvestays.ma</a>
+      </div>
+
+      <p class="footer-address">Dar Bouazza · Casablanca · Maroc</p>
+      
+      <p class="footer-credit">Twelve Stays · M Family Luxury · Édition 2026</p>
+    </div>
+  </footer>
+
+  <!-- Mailerlite tracking -->
+  <script>
+    // Mailerlite form handling avec feedback visuel
+    const form = document.getElementById('signup-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMessage = document.getElementById('success-message');
+    const formHelper = document.getElementById('form-helper');
+
+    form.addEventListener('submit', function(e) {
+      // Mailerlite va ouvrir un nouvel onglet (target="_blank") pour soumettre
+      // On affiche le message de succès après un court délai
+      
+      const emailInput = document.getElementById('email');
+      
+      if (!emailInput.value || !emailInput.checkValidity()) {
+        return; // Laisse le navigateur afficher l'erreur native
+      }
+      
+      // Désactive le bouton
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Envoi...';
+      
+      // Après 1.5 sec, on cache le form et on affiche le succès
+      setTimeout(function() {
+        form.style.display = 'none';
+        formHelper.style.display = 'none';
+        successMessage.classList.add('visible');
+      }, 1500);
+    });
+
+    // Tracking Mailerlite
+    fetch("https://assets.mailerlite.com/jsonp/2350150/forms/187514603413964798/takel").catch(function(){});
+
+    // Smooth scroll
+    document.querySelector('.scroll-indicator').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('vip').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
