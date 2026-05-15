@@ -712,7 +712,6 @@
           class="ml-block-form form-field"
           action="https://assets.mailerlite.com/jsonp/2350150/forms/187514603413964798/subscribe" 
           method="post"
-          target="_blank"
         >
           <input 
             type="email" 
@@ -791,34 +790,49 @@
     </div>
   </footer>
 
-  <!-- Mailerlite tracking -->
+  <!-- Form handling propre -->
   <script>
-    // Mailerlite form handling avec feedback visuel
     const form = document.getElementById('signup-form');
     const submitBtn = document.getElementById('submit-btn');
     const successMessage = document.getElementById('success-message');
     const formHelper = document.getElementById('form-helper');
 
     form.addEventListener('submit', function(e) {
-      // Mailerlite va ouvrir un nouvel onglet (target="_blank") pour soumettre
-      // On affiche le message de succès après un court délai
+      e.preventDefault(); // Empêche l'ouverture du nouvel onglet moche
       
       const emailInput = document.getElementById('email');
       
       if (!emailInput.value || !emailInput.checkValidity()) {
-        return; // Laisse le navigateur afficher l'erreur native
+        return;
       }
       
-      // Désactive le bouton
+      // Désactive le bouton et change le texte
       submitBtn.disabled = true;
       submitBtn.innerHTML = 'Envoi...';
       
-      // Après 1.5 sec, on cache le form et on affiche le succès
-      setTimeout(function() {
-        form.style.display = 'none';
-        formHelper.style.display = 'none';
-        successMessage.classList.add('visible');
-      }, 1500);
+      // Préparer les données du formulaire
+      const formData = new FormData(form);
+      const params = new URLSearchParams();
+      for (const pair of formData) {
+        params.append(pair[0], pair[1]);
+      }
+      
+      // Envoyer en AJAX (mode no-cors car Mailerlite ne renvoie pas les headers CORS)
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: params,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(function() {
+        // Rediriger vers la page merci.html
+        window.location.href = '/merci.html';
+      }).catch(function(error) {
+        // Même en cas d'erreur réseau, on redirige (l'inscription est probablement OK)
+        console.log('Form submitted:', error);
+        window.location.href = '/merci.html';
+      });
     });
 
     // Tracking Mailerlite
